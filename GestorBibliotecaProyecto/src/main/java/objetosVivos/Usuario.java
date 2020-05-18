@@ -5,11 +5,20 @@
  */
 package objetosVivos;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import objetosLectura.Libro;
+
 /**
  *
  * @author nicoc
  */
 public class Usuario extends Persona {
+    private ArrayList <Libro>libros=new ArrayList();
     private boolean estado;//Si esta dado de alta o esta de baja 
     
     /**
@@ -19,7 +28,7 @@ public class Usuario extends Persona {
      * @param e edad del usuario
      * @param d dni del usuario
      */
-    public Usuario(String n, String a, byte e, String d) {
+    public Usuario(String n, String a, byte e, String d)  {
         super(n, a, e,d);
         
     }
@@ -33,6 +42,46 @@ public class Usuario extends Persona {
         return estado;
     }
     
+    /**
+     * Getter de los libros del  usuario
+     * @return 
+     */
+    public ArrayList<Libro> getLibros() {
+        return libros;
+    }
+
+    
+    //Setter de los libros del usuario
+    public void setLibros(ArrayList<Libro> libros) {
+        this.libros = libros;
+    }
+    //Setter para dar de alta o baja a un usuario
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    
+    
+    
+    /**
+     * Metodo para Consultar cuales libros hay disponibles
+     * @return 
+     */
+    public String consultarLibros(){
+        
+        String libros="select * from libros";
+       
+        return libros;
+    }
+    
+    /**
+     * Metodo por el cual un usuario puede elegir un libro
+     * @param libro 
+     */
+    public void elegirLibro(String libro){
+        
+        
+    }
     
     
 }
