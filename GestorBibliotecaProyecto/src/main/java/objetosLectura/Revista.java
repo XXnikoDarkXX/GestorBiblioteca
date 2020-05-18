@@ -6,7 +6,7 @@
 package objetosLectura;
 
 /**
- *
+ *Clase revista 
  * @author nicoc
  */
 public class Revista {

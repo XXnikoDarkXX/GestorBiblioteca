@@ -6,7 +6,7 @@
 package objetosLectura;
 
 /**
- *
+ *SuperClase lectura todo lo relacionado con los libros,revistas, periódicos.... se heredará de aqiu
  * @author nicoc
  */
 public class Lectura {
