@@ -21,6 +21,10 @@ public class Usuario extends Persona {
     private ArrayList <Libro>libros=new ArrayList();
     private boolean estado;//Si esta dado de alta o esta de baja 
     
+            
+    
+    
+    
     /**
      * Constructor de Usuario con los parametros de Persona
      * @param n nombre del usuario
@@ -67,20 +71,34 @@ public class Usuario extends Persona {
      * Metodo para Consultar cuales libros hay disponibles
      * @return 
      */
-    public String consultarLibros(){
+    public String consultarLibros() throws SQLException{
+      
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from LIBROS");
+         String libros="";   
+            while (rs.next()) {
+           libros+=rs.getInt("CODIGO")+ " : " + rs.getString("NOMBRE") + " : " + rs.getString("CATEGORIA")+ " : " + rs.getString("PRESTAMO");
+        }
+           
         
-        String libros="select * from libros";
-       
+       rs.close();
         return libros;
     }
     
     /**
      * Metodo por el cual un usuario puede elegir un libro
-     * @param libro 
+     * @param nombreLibro nombre del libro por el cual va a ser usado
      */
-    public void elegirLibro(String libro){
+    public void elegirLibro(String nombrelibro) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from LIBROS");
         
+         int nfilas = smt.executeUpdate("update libros set PRESTAMO='EN USO' where NOMBRE="+nombrelibro);
+          
         
+        rs.close();
     }
     
     
