@@ -6,7 +6,7 @@
 package objetosVivos;
 
 /**
- *SuperClase Persona
+ *SuperClase Persona contiene todas las variables, funciones... comunes de una persona en nuestro programa
  * @author nicoc
  */
 public class Persona {
