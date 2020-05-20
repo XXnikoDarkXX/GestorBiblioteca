@@ -19,7 +19,7 @@ public class Periodico extends Lectura {
      * @param n nombre del periodico
      * @param ed 
      */
-    public Periodico(String codigo, String n,String ed,String tn) {
+    public Periodico(byte codigo, String n,String ed,String tn) {
         super(codigo, n);
         this.editorial=ed;
         this.tipoDeNoticias=tn;

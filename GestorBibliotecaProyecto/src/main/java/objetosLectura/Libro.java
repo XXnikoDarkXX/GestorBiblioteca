@@ -21,7 +21,7 @@ public class Libro extends Lectura{
      * @param categoria categoria del libro
      * @param ed editorial del  libro
      */
-    public Libro(String n, String c,String categoria,String ed) {
+    public Libro(String n, byte c,String categoria,String ed) {
         super(c,n );
         this.categoria=categoria;
         this.editorial=ed;

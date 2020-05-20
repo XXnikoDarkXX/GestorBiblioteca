@@ -5,14 +5,16 @@
  */
 package objetosLectura;
 
+import Main.Prestamo;
+
 /**
  *SuperClase lectura todo lo relacionado con los libros,revistas, periódicos.... se heredará de aqiu
  * @author nicoc
  */
-public class Lectura {
+public abstract class Lectura  implements Prestamo{
     
     private String nombre;//nombre
-    private String codigo;//codigo del libro
+    private byte codigo;//codigo del libro
     private String estadoPrestamo;//si esta en uso o no
     
     /**
@@ -21,9 +23,10 @@ public class Lectura {
      * @param c categoria de la lectura
      * @param es estado del prestamo
      */
-    public Lectura(String codigo,String n){
+    public Lectura(byte codigo,String n){
         this.nombre=n;
         this.codigo=codigo;
+        this.estadoPrestamo="sin uso";
         
      
     }
@@ -38,7 +41,7 @@ public class Lectura {
      * Getter del codigo
      * @return el codigo de la lectura
      */
-    public String getCodigo(){
+    public byte getCodigo(){
         return codigo;
     }
     
@@ -68,14 +71,30 @@ public class Lectura {
      * Setter de codigo
      * @param codigo a cambiar
      */
-    public void setCodigo(String codigo) {
+    public void setCodigo(byte codigo) {
         this.codigo = codigo;
     }
 
+   
+
+  
+   @Override
+    public  String gestionLecturaUsuario(byte codigo) {
+        
+        String mensajeUsar="";
+        if (codigo==this.codigo) {
+            if (this.estadoPrestamo.equalsIgnoreCase("no en uso")) {
+                mensajeUsar="si";
+            }else{
+                mensajeUsar="no";
+            }
+        }else{
+            mensajeUsar="te has equivocado de codigo";
+           
+        }
+        return mensajeUsar;
     
-    
-    
-    
+    } 
     
     
     

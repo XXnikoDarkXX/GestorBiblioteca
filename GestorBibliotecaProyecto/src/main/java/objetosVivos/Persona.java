@@ -5,11 +5,13 @@
  */
 package objetosVivos;
 
+import Main.Prestamo;
+
 /**
  *SuperClase Persona contiene todas las variables, funciones... comunes de una persona en nuestro programa
  * @author nicoc
  */
-public class Persona {
+public abstract  class Persona  {
     private String nombre;//nombre de la persona
     private String apellido;//apellido de la persona
     private byte edad;//Edad de la persona
@@ -78,5 +80,7 @@ public class Persona {
     
     
     
+    
+
     
 }

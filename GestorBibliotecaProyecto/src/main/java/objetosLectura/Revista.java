@@ -21,7 +21,7 @@ public class Revista extends Lectura {
      * @param tr tipo de revista
      * @param au autor de la revista
      */
-    public Revista(String codigo, String n,String tr,String au) {
+    public Revista(byte codigo, String n,String tr,String au) {
         super(codigo, n);
         this.tipoRevista=tr;
         this.autor=au;
@@ -49,6 +49,7 @@ public class Revista extends Lectura {
      */
     public void setTipoRevista(String tipoRevista) {
         this.tipoRevista = tipoRevista;
+        
     }
 
     /**

@@ -8,6 +8,11 @@ package Main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import objetosLectura.Lectura;
+import objetosLectura.Libro;
+import objetosLectura.Periodico;
+import objetosLectura.Revista;
+import objetosVivos.Gestor;
 import objetosVivos.Usuario;
 
 /**
@@ -25,9 +30,11 @@ public class GestorBiblioMain {
             
         Usuario prueba=new Usuario("pepe","garcia",(byte)22,"64332");
         
-        prueba.elegirLibro("'PRUEBA'");
-        System.out.println(prueba.consultarLibros());
+        Gestor nicolas=new Gestor("Nicolas","sanchez",(byte)18,"54373141");
         
+        Revista lectu=new Revista((byte)5,"La morte","conduccion","Soto");
+        
+        nicolas.agregarLectura(lectu);
     }
     
 }
