@@ -18,6 +18,7 @@ CREATE TABLE LIBROS(
     
 ALTER TABLE LIBROS ADD(EDITORIAL CHARACTER(20));
     
+
  
 CREATE TABLE periodico(
 	CODIGO INTEGER(2) primary KEY,
@@ -27,8 +28,18 @@ CREATE TABLE periodico(
     PRESTAMO CHARACTER (20));   
    
 
+CREATE TABLE REVISTA(
+	CODIGO INTEGER(2) primary KEY,
+	NOMBRE CHARACTER(20),
+    TIPOREVISTA CHARACTER(20),
+    AUTOR CHARACTER(20),
+    PRESTAMO CHARACTER (20));   
 
-    SELECT * FROM LIBROS;
-INSERT INTO LIBROS VALUES(1,'PRUEBA','FANTASIA','NO EN USO');
 
-select * from libros;
+    SELECT * FROM revista;
+INSERT INTO LIBROS VALUES(1,'PRUEBA','FANTASIA','NO EN USO','planetamundo');
+
+select * from periodico;
+
+delete from periodico
+where nombre='la morte';
