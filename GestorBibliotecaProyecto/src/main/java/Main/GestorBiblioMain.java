@@ -32,9 +32,14 @@ public class GestorBiblioMain {
         
         Gestor nicolas=new Gestor("Nicolas","sanchez",(byte)18,"54373141");
         
-        Revista lectu=new Revista((byte)5,"La morte","conduccion","Soto");
+        Lectura lectu=new Revista((byte)1,"La morte","Fantasia","NO EN USO");
         
-        nicolas.agregarLectura(lectu);
+      //  nicolas.agregarLectura(lectu); 
+        
+      //  nicolas.borrarLectura(lectu);
+        
+        System.out.println(prueba.consultarRevistas());
+        
     }
     
 }

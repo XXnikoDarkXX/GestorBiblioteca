@@ -26,7 +26,7 @@ public abstract class Lectura  implements Prestamo{
     public Lectura(byte codigo,String n){
         this.nombre=n;
         this.codigo=codigo;
-        this.estadoPrestamo="sin uso";
+        this.estadoPrestamo="NO EN USO";
         
      
     }

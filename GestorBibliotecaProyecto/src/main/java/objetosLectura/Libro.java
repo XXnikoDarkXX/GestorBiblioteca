@@ -26,6 +26,7 @@ public class Libro extends Lectura{
         this.categoria=categoria;
         this.editorial=ed;
         
+        
     }
     
     /**

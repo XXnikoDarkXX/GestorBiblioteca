@@ -41,13 +41,13 @@ public class Gestor extends Persona {
      * @param user ususuario que damos de baja
      */
     public void darBajaUsuario(Usuario user){
-
+        user.setEstado(false);
     }
     /**
      * Agregamos libro a la base 
      * antes buscamos que tipo es el objeto le y en caso
      * de ser periodico, libro o revista se insertara en su respectiva tabla de la bbdd
-     * @param le 
+     * @param le objeto de tipo lectura por el cual usaremos para insertar los libros
      */
     public void agregarLectura(Lectura le) throws SQLException{
                   Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
@@ -71,17 +71,50 @@ public class Gestor extends Persona {
           int nfilas = smt.executeUpdate("insert into revista values (" + (byte)le.getCodigo() + ",'" + le.getNombre() 
     + "', '" +((Revista)le).getTipoRevista()+"', '" +((Revista)le).getAutor() + "','"+ le.getEstadoPrestamo()+ "') ");
          
-            
+            rs.close();
             
         }
          
-        
-     
         smt.close();
         con.close();
         
         
     }
+    /**
+     * Metodo por el cual usando la id del libro creado podemos borrar un libro
+     * @param le
+     * @throws SQLException 
+     */
+    public void borrarLectura(Lectura le) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+            
+                   
+        
+       if (le.getClass().getName()=="objetosLectura.Libro") {//mediante estos metodo podremos saber que tipo va a a ser
+            //el objeto le en caso de que sea libro ...
+            ResultSet rs = smt.executeQuery("select * from LIBROS");
+      int nfilas = smt.executeUpdate("delete from libros where CODIGO= " + (byte)le.getCodigo() );//borramos el libro que 
+            //tenga la id de le
+                   
+               rs.close();
+        }else if(le.getClass().getName()=="objetosLectura.Periodico"){
+              ResultSet rs = smt.executeQuery("select * from periodico");//Mediante este metodo selecionamos la tabla
+        int nfilas = smt.executeUpdate("delete from periodico where CODIGO= " + (byte)le.getCodigo() );//borramos el libro que 
+      
+      rs.close();
+        }else if(le.getClass().getName()=="objetosLectura.Revista"){
+             ResultSet rs = smt.executeQuery("select * from revista");
+         
+            int nfilas = smt.executeUpdate("delete from revista where CODIGO= " + (byte)le.getCodigo() );//borramos el libro que 
+            rs.close();
+            
+        }
+        smt.close();
+        con.close();
+    }
+    
+    
     
     
     
