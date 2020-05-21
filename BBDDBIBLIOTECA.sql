@@ -36,10 +36,11 @@ CREATE TABLE REVISTA(
     PRESTAMO CHARACTER (20));   
 
 
-    SELECT * FROM revista;
-INSERT INTO LIBROS VALUES(1,'PRUEBA','FANTASIA','NO EN USO','planetamundo');
+    SELECT * FROM REVISTA;
+INSERT INTO REVISTA VALUES(6,'el pais','DEPORTE','RODRIGUEZ','no en uso');
+INSERT INTO PERIODICO VALUES(2,'EL MUNDO','planetamundo','en uso','deporte');
 
-select * from periodico;
+select * from PERIODICO;
 
-delete from periodico
-where nombre='la morte';
+delete from REVISTA
+where codigo=5;
