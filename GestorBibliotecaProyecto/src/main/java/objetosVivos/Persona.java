@@ -78,6 +78,22 @@ public abstract  class Persona  {
         this.edad = edad;
     }
     
+    /**
+     * Getter del DNI
+     * @return el dni
+     */
+    public String getDni() {
+        return dni;
+    }
+
+    /**
+     * Setter del DNI
+     * @param dni a cambiar
+     */
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    
     
     
     

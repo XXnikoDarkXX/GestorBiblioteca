@@ -141,7 +141,8 @@ public class Usuario extends Persona {
         return periodico;
     }
         /**
-         * 
+         * Mediante esta funcion elegimos un libro por el codigo del libro, y en la tabla de bbdd ponemos en uso
+         * el prestamo
          * @param codigo
          * @throws SQLException 
          */
@@ -159,7 +160,12 @@ public class Usuario extends Persona {
         con.close();
 
     }
-
+    /**
+     * Mediante esta funcion elegimos una Revista por el codigo de Revista, y en la tabla de bbdd ponemos en uso
+     * el prestamo
+     * @param codigo codigo de la revista
+     * @throws SQLException en caso de error con la consulta en la bbdd lanzara esta excepcion
+     */
     public void elegirRevista(byte codigo) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
@@ -171,7 +177,12 @@ public class Usuario extends Persona {
         smt.close();
         con.close();
     }
-
+    /**
+     *  Mediante esta funcion elegimos un Periodico por el codigo del Periodico, y en la tabla de bbdd ponemos en uso
+     * el prestamo
+     * @param codigo del periodico
+     * @throws SQLException en caso de error en la consulta con la bbdd lanzara esta excepcion
+     */
     public void elegirPeriodico(byte codigo) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
