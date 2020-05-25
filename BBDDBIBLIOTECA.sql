@@ -36,11 +36,19 @@ CREATE TABLE REVISTA(
     PRESTAMO CHARACTER (20));   
 
 
-    SELECT * FROM REVISTA;
-INSERT INTO REVISTA VALUES(6,'el pais','DEPORTE','RODRIGUEZ','no en uso');
+CREATE TABLE GESTOR (
+	NIF CHARACTER(20)PRIMARY KEY,
+    NOMBRE CHARACTER(20),
+    APELLIDO CHARACTER(20),
+    EDAD INTEGER(2));
+
+
+
+    SELECT * FROM GESTOR;
+INSERT INTO REVISTA VALUES(2,'PARACHA','DEPORTE','RODRIGUEZ','EN USO');
 INSERT INTO PERIODICO VALUES(2,'EL MUNDO','planetamundo','en uso','deporte');
 
-select * from PERIODICO;
+select * from periodico;
 
-delete from REVISTA
-where codigo=5;
+delete from gestor
+where edad=18;

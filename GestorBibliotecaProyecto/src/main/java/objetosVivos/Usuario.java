@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import objetosLectura.Lectura;
+import objetosLectura.LecturaExcepcion;
 import objetosLectura.Libro;
 
 /**
@@ -75,11 +78,11 @@ public class Usuario extends Persona {
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
         ResultSet rs = smt.executeQuery("select * from LIBROS");
-        String libros = "CODIGO   |  NOMBRE  |  CATEGORIA |  PRESTAMO \n";
+        String libros = "CODIGO   |  NOMBRE  |  CATEGORIA |  PRESTAMO  | EDITORIAL  \n";
         int i = 0;//contador
         while (rs.next()) {
             if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
-                libros += rs.getInt("CODIGO") + " :      " + rs.getString("NOMBRE") + " :     " + rs.getString("CATEGORIA") + " :     " + rs.getString("PRESTAMO");
+                libros += rs.getInt("CODIGO") + " :      " + rs.getString("NOMBRE") + " : " + rs.getString("CATEGORIA") + " :     " + rs.getString("PRESTAMO") + " :      " + rs.getString("EDITORIAL");
 
             }
         }
@@ -104,7 +107,7 @@ public class Usuario extends Persona {
         String revista = "CODIGO         |       NOMBRE       |      TIPODEREVISTA    |      AUTOR     |    PRESTAMO \n";
         int i = 0;//contador
         while (rs.next()) {
-            if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) { 
+            if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
                 revista += rs.getInt("CODIGO") + " :\t\t" + rs.getString("NOMBRE") + " :  \t\t" + rs.getString("TIPOREVISTA") + " :\t\t " + rs.getString("AUTOR") + " : \t\t" + rs.getString("PRESTAMO");
 
             }
@@ -117,9 +120,11 @@ public class Usuario extends Persona {
     }
 
     /**
-     *Metodo para consultar que periodicos estan disponible
+     * Metodo para consultar que periodicos estan disponible
+     *
      * @return un String con toda la informacion
-     * @throws SQLException En caso de error en la consulta de BBDD  lanzara la excepcion 
+     * @throws SQLException En caso de error en la consulta de BBDD lanzara la
+     * excepcion
      */
     public String consultarPeriodicos() throws SQLException {
 
@@ -130,28 +135,44 @@ public class Usuario extends Persona {
         int i = 0;//contador
         while (rs.next()) {
             if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
-                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          "+rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS");
+                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          " + rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS");
 
-        }
             }
+        }
 
         rs.close();
         smt.close();
         con.close();
         return periodico;
     }
-        /**
-         * Mediante esta funcion elegimos un libro por el codigo del libro, y en la tabla de bbdd ponemos en uso
-         * el prestamo
-         * @param codigo
-         * @throws SQLException 
-         */
-    public void elegirLibro(byte codigo) throws SQLException {
+
+    /**
+     * Mediante esta funcion elegimos un libro por el codigo del libro, y en la
+     * tabla de bbdd ponemos en uso el prestamo
+     *
+     * @param codigo
+     * @throws SQLException
+     */
+    public void elegirLibro(byte codigo) throws SQLException, LecturaExcepcion {
+        LinkedList<Integer> lista = new LinkedList();//creamos una lista donde tenemos todos los codigos que estan en uso
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
 
         ResultSet rs = smt.executeQuery("select * from LIBROS");
-        
+        //MEDIANTe este while añadimos a las lista los codigos en uso
+        while (rs.next()) {
+            if (rs.getString("PRESTAMO").equalsIgnoreCase("EN USO")) {
+                lista.add(rs.getInt("CODIGO"));
+
+            }
+        }
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (codigo == lista.get(i)) {
+                throw new LecturaExcepcion("ERROR: has elegido un codigo ya en uso prueba con otro");
+
+            }
+        }
         int nfilas = smt.executeUpdate("update libros set PRESTAMO='EN USO' where codigo=" + codigo);//Ponemos 
         //el prestamo en uso
 
@@ -160,35 +181,74 @@ public class Usuario extends Persona {
         con.close();
 
     }
+
     /**
-     * Mediante esta funcion elegimos una Revista por el codigo de Revista, y en la tabla de bbdd ponemos en uso
-     * el prestamo
+     * Mediante esta funcion elegimos una Revista por el codigo de Revista, y en
+     * la tabla de bbdd ponemos en uso el prestamo
+     *
      * @param codigo codigo de la revista
-     * @throws SQLException en caso de error con la consulta en la bbdd lanzara esta excepcion
+     * @throws SQLException en caso de error con la consulta en la bbdd lanzara
+     * esta excepcion
      */
-    public void elegirRevista(byte codigo) throws SQLException {
+    public void elegirRevista(byte codigo) throws SQLException, LecturaExcepcion {
+        LinkedList<Integer> lista = new LinkedList();//creamos una lista donde tenemos todos los codigos que estan en uso
+
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
         ResultSet rs = smt.executeQuery("select * from revista");
+            //MEDIANTe este while añadimos a las lista los codigos en uso
+        while (rs.next()) {
+            if (rs.getString("PRESTAMO").equalsIgnoreCase("EN USO")) {
+                lista.add(rs.getInt("CODIGO"));
 
-        int nfilas = smt.executeUpdate("update revista set PRESTAMO='EN USO' where NOMBRE=" + codigo);//Ponemos 
+            }
+        }
+         for (int i = 0; i < lista.size(); i++) {
+            if (codigo == lista.get(i)) {
+                throw new LecturaExcepcion("ERROR: has elegido un codigo que ya  esta en uso prueba con otro");
+
+            }
+        }
+        
+        
+        
+        int nfilas = smt.executeUpdate("update revista set PRESTAMO='EN USO' where codigo=" + codigo);//Ponemos 
         rs.close();
 
         smt.close();
         con.close();
     }
+
     /**
-     *  Mediante esta funcion elegimos un Periodico por el codigo del Periodico, y en la tabla de bbdd ponemos en uso
-     * el prestamo
+     * Mediante esta funcion elegimos un Periodico por el codigo del Periodico,
+     * y en la tabla de bbdd ponemos en uso el prestamo
+     *
      * @param codigo del periodico
-     * @throws SQLException en caso de error en la consulta con la bbdd lanzara esta excepcion
+     * @throws SQLException en caso de error en la consulta con la bbdd lanzara
+     * esta excepcion
      */
-    public void elegirPeriodico(byte codigo) throws SQLException {
+    public void elegirPeriodico(byte codigo) throws SQLException, LecturaExcepcion{
+          LinkedList<Integer> lista = new LinkedList();//creamos una lista donde tenemos todos los codigos que estan en uso
+
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
 
         ResultSet rs = smt.executeQuery("select * from periodico");//Mediante este metodo selecionamos la tabla
-        int nfilas = smt.executeUpdate("update periodico set PRESTAMO='EN USO' where NOMBRE=" + codigo);//Ponemos 
+            //MEDIANTe este while añadimos a las lista los codigos en uso
+        while (rs.next()) {
+            if (rs.getString("PRESTAMO").equalsIgnoreCase("EN USO")) {
+                lista.add(rs.getInt("CODIGO"));
+
+            }
+        }
+        for (int i = 0; i < lista.size(); i++) {
+            if (codigo == lista.get(i)) {
+                throw new LecturaExcepcion("ERROR: has elegido un codigo que ya  esta en uso prueba con otro");
+
+            }
+        }
+        
+        int nfilas = smt.executeUpdate("update periodico set PRESTAMO='EN USO' where codigo=" + codigo);//Ponemos 
 
     }
 
