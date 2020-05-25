@@ -13,7 +13,9 @@ import objetosLectura.LecturaExcepcion;
 import objetosLectura.Libro;
 import objetosLectura.Periodico;
 import objetosLectura.Revista;
+import objetosVivos.Administrador;
 import objetosVivos.Gestor;
+import objetosVivos.GestorExcepcion;
 import objetosVivos.Usuario;
 
 /**
@@ -25,14 +27,14 @@ public class GestorBiblioMain {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException, LecturaExcepcion {
+    public static void main(String[] args) throws SQLException, LecturaExcepcion, GestorExcepcion {
        
          Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
             
         Usuario prueba=new Usuario("pepe","garcia",(byte)22,"64332");
         
-       // Gestor nicolas=new Gestor("Nicolas","sanchez",(byte)18,"54373141");
-        
+    //    Gestor nicolas=new Gestor("Nicolas","sanchez",(byte)18,"54373141");
+        Administrador pepe=new Administrador("pepe","sanchez",(byte)18,"54373141");
         Lectura lectu=new Revista((byte)1,"La morte","Fantasia","NO EN USO");
         
       //  nicolas.agregarLectura(lectu); 
@@ -40,7 +42,10 @@ public class GestorBiblioMain {
       //  nicolas.borrarLectura(lectu);
         
         System.out.println(prueba.consultarRevistas());
-        prueba.elegirRevista((byte)6);
+        
+        System.out.println( pepe.mostrarGestores());
+        pepe.borrarGestor("54373141");
+      //  prueba.elegirRevista((byte)6);
        
     }
     

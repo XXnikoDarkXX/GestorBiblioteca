@@ -5,7 +5,7 @@
  */
 package objetosVivos;
 
-import Main.Prestamo;
+
 
 /**
  *SuperClase Persona contiene todas las variables, funciones... comunes de una persona en nuestro programa

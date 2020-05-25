@@ -5,13 +5,12 @@
  */
 package objetosLectura;
 
-import Main.Prestamo;
 
 /**
  *SuperClase lectura todo lo relacionado con los libros,revistas, periódicos.... se heredará de aqiu
  * @author nicoc
  */
-public abstract class Lectura  implements Prestamo{
+public abstract class Lectura {
     
     private String nombre;//nombre
     private byte codigo;//codigo del libro
@@ -78,7 +77,7 @@ public abstract class Lectura  implements Prestamo{
    
 
   
-   @Override
+  
     public  String gestionLecturaUsuario(byte codigo) {
         
         String mensajeUsar="";
