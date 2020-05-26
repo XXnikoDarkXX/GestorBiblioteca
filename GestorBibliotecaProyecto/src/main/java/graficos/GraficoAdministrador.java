@@ -13,11 +13,11 @@ import javax.swing.SwingConstants;
 
 public class GraficoAdministrador extends JPanel {
 	private JPasswordField passwordField;
-
+	private GraficoVentana ventana;
 	/**
 	 * Create the panel.
 	 */
-	public GraficoAdministrador() {
+	public GraficoAdministrador(GraficoVentana v) {
 		setLayout(new GridLayout(3, 0, 0, 0));
 		
 		JTextPane txtContraseña = new JTextPane();
@@ -31,7 +31,11 @@ public class GraficoAdministrador extends JPanel {
 		
 		JButton btnContraseña = new JButton("Aplicar");
 		add(btnContraseña);
+		
+		this.ventana=v;
 
 	}
+	
+	
 
 }

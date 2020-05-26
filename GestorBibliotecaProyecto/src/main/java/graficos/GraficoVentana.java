@@ -14,6 +14,8 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GraficoVentana extends JFrame {
 
@@ -40,6 +42,10 @@ public class GraficoVentana extends JFrame {
 	 * Create the frame.
 	 */
 	public GraficoVentana() {
+		
+		
+	
+		
 		setTitle("Gestor de Biblioteca");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(300, 70, 600, 400);
@@ -62,6 +68,10 @@ public class GraficoVentana extends JFrame {
 		contentPane.add(lblOpcion);
 
 		JButton btnAdministrador = new JButton("Admistrador");
+		
+		
+		
+		
 		contentPane.add(btnAdministrador);
 
 		JButton btnGestor = new JButton("Gestor");
@@ -69,16 +79,29 @@ public class GraficoVentana extends JFrame {
 
 		JButton btnUsuario = new JButton("Usuario");
 		contentPane.add(btnUsuario);
+		
+		
+		
+		
+		
 	}
-
+	
+	
+	
+	/**
+	 * Con este método podemos cargar y cambiar a la ventana del administrador
+	 */
+	
 	public void cargarGraficoAdministrador() {
-		if (this.admin == null) {
-			this.admin = new GraficoAdministrador(this);
-		}
-		this.admin.setVisible(false);
+	
 
-		this.setContentPane(this.admin);
-		this.admin.setVisible(true);
+		
 	}
+	
+	
+	
+	
 
 }
+
+
