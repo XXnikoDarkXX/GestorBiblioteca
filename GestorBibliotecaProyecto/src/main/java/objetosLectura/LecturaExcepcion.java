@@ -11,7 +11,8 @@ package objetosLectura;
  */
 public class LecturaExcepcion  extends Exception{
        public LecturaExcepcion() {
-        super();
+       
+           super();
     }
        public LecturaExcepcion(String message) {
         super(message);
