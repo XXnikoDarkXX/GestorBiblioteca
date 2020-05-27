@@ -8,6 +8,8 @@ package Main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import graficos.GraficoVentana;
 import objetosLectura.Lectura;
 import objetosLectura.LecturaExcepcion;
 import objetosLectura.Libro;
@@ -29,7 +31,9 @@ public class GestorBiblioMain {
      */
     public static void main(String[] args) throws SQLException, LecturaExcepcion, GestorExcepcion {
        
-         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        // Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+            GraficoVentana ventana=new GraficoVentana();
+            ventana.setVisible(true);
             
         Usuario prueba=new Usuario("pepe","garcia",(byte)22,"64332");
         
@@ -43,8 +47,8 @@ public class GestorBiblioMain {
         
         System.out.println(prueba.consultarRevistas());
         
-        System.out.println( pepe.mostrarGestores());
-        pepe.borrarGestor("54373141");
+    
+   
       //  prueba.elegirRevista((byte)6);
        
     }

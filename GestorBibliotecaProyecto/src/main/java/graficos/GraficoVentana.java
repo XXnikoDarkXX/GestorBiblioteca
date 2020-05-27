@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import objetosVivos.Gestor;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -21,22 +24,15 @@ public class GraficoVentana extends JFrame {
 
 	private JPanel contentPane;
 	private GraficoAdministrador admin;
-
+	private GraficoGestionAdmin gestionAdmin;
+	
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GraficoVentana frame = new GraficoVentana();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -44,11 +40,13 @@ public class GraficoVentana extends JFrame {
 	public GraficoVentana() {
 		
 		
-	
+
+		
+		
 		
 		setTitle("Gestor de Biblioteca");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 70, 600, 400);
+		setBounds(300, 70, 800, 400);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -57,6 +55,7 @@ public class GraficoVentana extends JFrame {
 		menuBar.add(mnInicio);
 
 		JMenuItem mntmIrInicio = new JMenuItem("Ir a Inicio");
+		
 		mnInicio.add(mntmIrInicio);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,8 +67,20 @@ public class GraficoVentana extends JFrame {
 		contentPane.add(lblOpcion);
 
 		JButton btnAdministrador = new JButton("Admistrador");
+		btnAdministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargaPantalla1();
+				
+			}
+		});
 		
-		
+		mntmIrInicio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				cargarInicio();
+			}
+		});
 		
 		
 		contentPane.add(btnAdministrador);
@@ -92,15 +103,42 @@ public class GraficoVentana extends JFrame {
 	 * Con este método podemos cargar y cambiar a la ventana del administrador
 	 */
 	
-	public void cargarGraficoAdministrador() {
-	
-
+	public void cargaPantalla1() {
+		if (this.admin==null) {
+			this.admin=new GraficoAdministrador(this);
+		}
+		this.admin.setVisible(false);
 		
+		this.setContentPane(this.admin);
+		this.admin.setVisible(true);
 	}
 	
 	
-	
-	
+	 public void cargarGraficoGestor() {
+		if (this.gestionAdmin==null) {
+			this.gestionAdmin=new GraficoGestionAdmin(this);
+		}
+		
+		this.admin.setVisible(false);
+		this.setContentPane(this.gestionAdmin);
+		this.gestionAdmin.setVisible(true);
+	}
+	 public void cargarInicio() {
+			
+			this.setContentPane(this.contentPane);
+			this.contentPane.setVisible(true);
+		}
+	 
+	 
+	 public void cargarGestionAdmin() {
+		if (this.gestionAdmin==null) {
+			this.gestionAdmin=new GraficoGestionAdmin(this);
+		}
+		
+		this.admin.setVisible(false);
+		this.setContentPane(this.gestionAdmin);
+		this.gestionAdmin.setVisible(true);
+	}
 
 }
 

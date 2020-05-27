@@ -74,7 +74,7 @@ public class Administrador extends Persona {
         int i = 0;//contador
         while (rs.next()) {
 
-            gestor += rs.getString("NIF") + " :           " + rs.getString("NOMBRE") + " :          " + rs.getString("APELLIDO") + " :       " + rs.getInt("EDAD");
+            gestor += rs.getString("NIF") + " :           " + rs.getString("NOMBRE") + " :          " + rs.getString("APELLIDO") + " :       " + rs.getInt("EDAD")+"\n";
 
         }
         rs.close();
