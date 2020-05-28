@@ -22,14 +22,28 @@ import objetosLectura.Revista;
  * @author nicoc
  */
 public class Gestor extends Persona {
+	
+	/**
+	 * Construcot de Gestor vacio
+	 */
+	public Gestor() {
+		
+	}
 
     public Gestor(String n, String a, byte e, String d) throws SQLException {
+    	
         super(n, a, e, d);
-
+        try {
        
-        this.insertarGestor(d,n,a,e);
+      //  this.insertarGestor(d,n,a,e);
+    	}catch(NumberFormatException ex) {
+    		ex.printStackTrace();
+    		System.out.println("Error te has equivocado y no has introducido un numero");
+    	}
     }
 
+    	
+    
     /**
      * Damos de alta al usuario
      *

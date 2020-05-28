@@ -30,7 +30,14 @@ public abstract  class Persona  {
         this.edad=e;
         this.dni=d;
     }
-
+    
+    /**
+     * Constructor de Persona sin parametros
+     */
+    public Persona() {
+    	
+    }
+    
     /**
      * Getter de nombre
      * @return el nombre
