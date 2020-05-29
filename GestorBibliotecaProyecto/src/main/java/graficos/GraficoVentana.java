@@ -27,8 +27,8 @@ public class GraficoVentana extends JFrame {
 	private GraficoGestionAdmin gestionAdmin;//Grafico con las funciones del administrador
 	private GraficoGestor gestor;//Grafico del gestor principal
 	private InsertarGestor inserGestor;//Grafico para insertar Gestor
-	
-	
+	private GraficoInsertarLectura inserLectura;//Grafico para insertar lectura desde GESTOR
+	private GraficoBorrarLectura borrarLectura;//Grafico para mostrar y borrar lectura desde GESTOR
 	
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class GraficoVentana extends JFrame {
 		
 		setTitle("Gestor de Biblioteca");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(300, 70, 800, 400);
+		setBounds(300, 70, 900, 500);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -168,7 +168,32 @@ public class GraficoVentana extends JFrame {
 	}
 	 
 	 
+	 /**
+	  * Metodo para cargar la grafica de insertarLectura
+	  */
+	 public void cargarGraficoInsertarLectura() {
+		if (this.inserLectura==null) {
+			this.inserLectura=new GraficoInsertarLectura(this);
+		}
+		
+		this.inserLectura.setVisible(false);
+		this.setContentPane(this.inserLectura);
+		this.inserLectura.setVisible(true);
+	}
 	 
+	 /**
+	  * Metodo para cargar la grafica de borrarLectura
+	  */
+	 public void cargarGraficoBorrarLectura() {
+		if (this.borrarLectura==null) {
+			this.borrarLectura=new GraficoBorrarLectura(this);
+		}
+		
+		this.borrarLectura.setVisible(false);
+		
+		this.setContentPane(this.borrarLectura);
+		this.borrarLectura.setVisible(true);
+	}
 	 
 	 
 	 

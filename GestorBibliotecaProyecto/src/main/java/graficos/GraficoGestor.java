@@ -54,12 +54,17 @@ public class GraficoGestor extends JPanel {
 		bg.add(rbOpcion1);
 		bg.add(rbOpcion2);
 		bg.add(rbOpcion3);
+		bg.add(rbOpcion4);
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				if (rbOpcion1.isSelected()) {
 					ventana.cargarGraficoInsertarGestor();
+				}else if(rbOpcion2.isSelected()) {
+					ventana.cargarGraficoBorrarLectura();
+				}else if(rbOpcion3.isSelected()) {
+					ventana.cargarGraficoInsertarLectura();
 				}
 			}
 		});

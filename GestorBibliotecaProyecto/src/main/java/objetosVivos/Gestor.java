@@ -129,7 +129,7 @@ public class Gestor extends Persona {
      *
      * @param le
      * @throws SQLException
-     */
+     *
     public void borrarLectura(Lectura le) throws SQLException {
     	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
@@ -156,6 +156,58 @@ public class Gestor extends Persona {
         smt.close();
         con.close();
     }
+    
+    */
+    
+    /**
+     * Metodo para borrar Libro de la bbdd
+     * @param codigo que pasamos por parametro para borrar
+     * @throws SQLException
+     */
+    public void borrarLibro(byte codigo) throws SQLException {
+   
+        	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+            Statement smt = con.createStatement();//Crear la consulta
+
+           
+                ResultSet rs = smt.executeQuery("select * from LIBROS");
+               int nfilas = smt.executeUpdate("delete from libros where CODIGO= "+ (byte)codigo);//borramos el libro que 
+                //tenga la id 
+
+                rs.close();
+                smt.close();
+                con.close();
+    }
+    /**
+     * Metodo para borrar una revista de la bbdd
+     * @param codigo que pasamos por parametros para borrar la revista
+     * @throws SQLException en caso de error con la peticion de la bbdd nos lanzara este error
+     */
+    public void borrarRevista(byte codigo) throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+    	
+    	 ResultSet rs = smt.executeQuery("select * from revista");
+
+         int nfilas = smt.executeUpdate("delete from revista where CODIGO= " + (byte)codigo);//borramos el libro que 
+         rs.close();
+    }
+    
+    
+    
+    public void borrarPeriodico(byte codigo) throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+    	
+    	
+    	ResultSet rs = smt.executeQuery("select * from revista");
+
+        int nfilas = smt.executeUpdate("delete from revista where CODIGO= " + (byte)codigo);//borramos el libro que 
+        rs.close();
+    }
+    
+    
+    
     /**
      * Metodo para insertarUsuario
      * @param user usuario que creamos
@@ -182,6 +234,86 @@ public class Gestor extends Persona {
     	}
         
         
+    }
+    
+    
+    /**
+     * Metodo para Consultar los libros
+     *
+     * @return un String con todos los libros que no estan en uso
+     */
+    public String consultarLibros() throws SQLException {
+
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from LIBROS");
+        String libros = "CODIGO\t   |  NOMBRE\t  |  CATEGORIA\t |  PRESTAMO  \t| EDITORIAL  \n";
+       
+        while (rs.next()) {
+            
+                libros += rs.getInt("CODIGO") + " :\t    " + rs.getString("NOMBRE") + " :\t" + rs.getString("CATEGORIA") + " :\t" + rs.getString("PRESTAMO") + " :\t       " + rs.getString("EDITORIAL")+"\n";
+
+            
+        }
+
+        rs.close();
+        smt.close();
+        con.close();
+        return libros;
+    }
+    
+    
+    
+    /**
+     * Metodo para consultarl las Revistas
+     *
+     * @return String con toda la informacion
+     * @throws SQLException lanzara un error de bbdd sql
+     */
+    public String consultarRevistas() throws SQLException {
+
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from revista");
+        String revista = "CODIGO\t|NOMBRE  \t|TIPODEREVISTA |\t   AUTOR     | \t   PRESTAMO \n";
+        int i = 0;//contador
+        while (rs.next()) {
+            
+                revista += rs.getInt("CODIGO") + "\t" + rs.getString("NOMBRE") + " :\t" + rs.getString("TIPOREVISTA") + " :\t        " + rs.getString("AUTOR") + " : \t" + rs.getString("PRESTAMO")+"\n";
+
+            
+        }
+
+        rs.close();
+        smt.close();
+        con.close();
+        return revista;
+    }
+    /**
+     * Metodo para consultar que periodic
+     *
+     * @return un String con toda la informacion
+     * @throws SQLException En caso de error en la consulta de BBDD lanzara la
+     * excepcion
+     */
+    public String consultarPeriodicos() throws SQLException {
+
+        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from PERIODICO");
+        String periodico = "CODIGO         |       NOMBRE       |      EDITORIAL    |      PRESTAMO     |    TIPODENOTICIAS \n";
+        int i = 0;//contador
+        while (rs.next()) {
+          
+                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          " + rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS");
+
+            
+        }
+
+        rs.close();
+        smt.close();
+        con.close();
+        return periodico;
     }
 
 }
