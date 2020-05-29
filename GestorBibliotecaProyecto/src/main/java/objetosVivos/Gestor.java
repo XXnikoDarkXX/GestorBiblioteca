@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import objetosLectura.Lectura;
 import objetosLectura.Libro;
@@ -22,14 +23,28 @@ import objetosLectura.Revista;
  * @author nicoc
  */
 public class Gestor extends Persona {
+	
+	
+	
 
-    public Gestor(String n, String a, byte e, String d) throws SQLException {
+    public Gestor(String n, String a, byte e, String d)  {
+    	
         super(n, a, e, d);
-
+        try {
        
-        this.insertarGestor(d,n,a,e);
+      //  this.insertarGestor(d,n,a,e);
+    	}catch(NumberFormatException ex) {
+    		ex.printStackTrace();
+    		System.out.println("Error te has equivocado y no has introducido un numero");
+    	}
     }
-
+    /**
+     * Concstructor De Gestor Vacio
+     */
+    	public Gestor() {
+		
+	}
+    
     /**
      * Damos de alta al usuario
      *
@@ -116,7 +131,7 @@ public class Gestor extends Persona {
      * @throws SQLException
      */
     public void borrarLectura(Lectura le) throws SQLException {
-        Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
 
         if (le.getClass().getName() == "objetosLectura.Libro") {//mediante estos metodo podremos saber que tipo va a a ser
@@ -140,6 +155,33 @@ public class Gestor extends Persona {
         }
         smt.close();
         con.close();
+    }
+    /**
+     * Metodo para insertarUsuario
+     * @param user usuario que creamos
+     * @throws SQLException en caso de error lanzara esta excepcion de la bbdd
+     */
+    public void insertarUsuario(Usuario user) throws SQLException {
+    	try {
+    	 Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+         Statement smt = con.createStatement();//Crear la consulta
+         ResultSet rs = smt.executeQuery("select * from USUARIO");//Mediante este metodo selecionamos la tabla
+          
+        //   int nfilas = smt.executeUpdate("insert into USUARIO values ('" + "PREUBA" + "','" + "FERNANDEZ"+
+          //         "','" + 33 + "','"+"545A"+ "','"+"BAJA"+"') ");
+       
+       int nfilas = smt.executeUpdate("insert into USUARIO values ('" + user.getNombre() + "','" + user.getApellido()+
+          "','" + user.getEdad() + "','"+user.getDni()+ "','"+user.isEstado()+"') ");
+       rs.close();
+       smt.close();
+       con.close();
+         
+    	}catch(SQLIntegrityConstraintViolationException ex) {
+    		ex.printStackTrace();
+    		System.out.println("Has puesto un nif ya elegido");
+    	}
+        
+        
     }
 
 }

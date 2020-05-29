@@ -23,9 +23,10 @@ import java.awt.event.MouseEvent;
 public class GraficoVentana extends JFrame {
 
 	private JPanel contentPane;
-	private GraficoAdministrador admin;
-	private GraficoGestionAdmin gestionAdmin;
-	
+	private GraficoAdministrador admin;//Grafico para logarse como administrador
+	private GraficoGestionAdmin gestionAdmin;//Grafico con las funciones del administrador
+	private GraficoGestor gestor;//Grafico del gestor principal
+	private InsertarGestor inserGestor;//Grafico para insertar Gestor
 	
 	
 	
@@ -86,12 +87,20 @@ public class GraficoVentana extends JFrame {
 		contentPane.add(btnAdministrador);
 
 		JButton btnGestor = new JButton("Gestor");
+		
 		contentPane.add(btnGestor);
 
 		JButton btnUsuario = new JButton("Usuario");
 		contentPane.add(btnUsuario);
-		
-		
+		/**
+		 * Mediante el boton de gestor cargamos el menu de los gestores
+		 */
+		btnGestor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarGraficoGestor();
+			}
+		});
 		
 		
 		
@@ -113,23 +122,15 @@ public class GraficoVentana extends JFrame {
 		this.admin.setVisible(true);
 	}
 	
-	
-	 public void cargarGraficoGestor() {
-		if (this.gestionAdmin==null) {
-			this.gestionAdmin=new GraficoGestionAdmin(this);
-		}
-		
-		this.admin.setVisible(false);
-		this.setContentPane(this.gestionAdmin);
-		this.gestionAdmin.setVisible(true);
-	}
 	 public void cargarInicio() {
 			
 			this.setContentPane(this.contentPane);
 			this.contentPane.setVisible(true);
 		}
 	 
-	 
+	 /**
+	  * Metodo para cargar las funciones del Administrador para borrar y mostrar gestores
+	  */
 	 public void cargarGestionAdmin() {
 		if (this.gestionAdmin==null) {
 			this.gestionAdmin=new GraficoGestionAdmin(this);
@@ -139,6 +140,38 @@ public class GraficoVentana extends JFrame {
 		this.setContentPane(this.gestionAdmin);
 		this.gestionAdmin.setVisible(true);
 	}
+	 
+	 /**
+	  * Metodo para cargar el menu del Gestor
+	  */
+	 public void cargarGraficoGestor() {
+		if (this.gestor==null) {
+			this.gestor=new GraficoGestor(this);
+		}
+		
+		this.gestor.setVisible(false);
+		this.setContentPane(this.gestor);
+		this.gestor.setVisible(true);
+	}
+	 
+	 /**
+	  * Metodo para cargar la funcion de insertar Gestor
+	  */
+	 public void cargarGraficoInsertarGestor() {
+		if (this.inserGestor==null) {
+			this.inserGestor=new InsertarGestor(this);
+		}
+		
+		this.inserGestor.setVisible(false);
+		this.setContentPane(this.inserGestor);
+		this.inserGestor.setVisible(true);
+	}
+	 
+	 
+	 
+	 
+	 
+	 
 
 }
 

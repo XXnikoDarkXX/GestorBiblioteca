@@ -48,7 +48,7 @@ CREATE TABLE GESTOR (
 INSERT INTO GESTOR VALUES('123456E','PRUEBA','PROBANDO',19);
 INSERT INTO PERIODICO VALUES(2,'EL MUNDO','planetamundo','en uso','deporte');
 
-select * from periodico;
+select * from usuario;
 
 delete from gestor
 where edad=18;

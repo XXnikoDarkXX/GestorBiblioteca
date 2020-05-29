@@ -17,6 +17,11 @@ public abstract  class Persona  {
     private byte edad;//Edad de la persona
     private String dni;//Dni de la persona
     
+    public Persona() {
+    	
+    }
+    	
+    
     /**
      * Constructor de Persona con todos sus parametros
      * @param n nombre de la persona

@@ -3,11 +3,17 @@ package graficos;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import objetosLectura.Lectura;
+import objetosLectura.Libro;
+import objetosLectura.Periodico;
+import objetosLectura.Revista;
+import objetosVivos.Gestor;
+
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -21,7 +27,6 @@ public class GraficoInsertarLectura extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JButton btnOpcion;
 	private JTextField txtCodigo;
-	private JLabel label;
 	private JRadioButton rbPeriodico;
 	private JRadioButton rbRevista;
 	private JRadioButton rbLibro;
@@ -31,39 +36,14 @@ public class GraficoInsertarLectura extends JPanel {
 	private Gestor creadorLectura =new Gestor();//Tenemos un Gestor vacio para ir insertando la Lectura
 	private GraficoVentana v;//Jframe de la ventana principal
 	private MisJOptionPane op;//Dialogos de texto
-=======
-
-public class GraficoInsertarLectura extends JPanel {
-=======
-
-public class GraficoInsertarLectura extends JPanel {
->>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JSeparator separator;
-<<<<<<< HEAD
->>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
-=======
->>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
+	private JLabel label_1;
+	private JTextField txtNombre;
+	private JTextField txtCategoria;
+	private JTextField txtEditorial;
 
 	/**
 	 * Create the panel.
 	 */
-<<<<<<< HEAD
-<<<<<<< HEAD
 	public GraficoInsertarLectura(GraficoVentana ventana) {
 		this.v=ventana;
 		lblNewLabel_1 = new JLabel("Elige la opcion Que vas a usar:");
@@ -71,40 +51,49 @@ public class GraficoInsertarLectura extends JPanel {
 		txtCodigo = new JTextField();
 		txtCodigo.setText("Codigo");
 		txtCodigo.setColumns(10);
-		setLayout(new MigLayout("", "[225px][225px]", "[64px][64px][64px][64px][64px]"));
-		add(lblNewLabel_1, "cell 0 0,grow");
+		setLayout(new GridLayout(0, 2, 0, 0));
+		add(lblNewLabel_1);
 		
 		rbLibro = new JRadioButton("Libro");
 		rbLibro.setSelected(true);
-		add(rbLibro, "cell 1 0,grow");
+		add(rbLibro);
 		
 		rbRevista = new JRadioButton("Revista");
-		add(rbRevista, "cell 0 1,grow");
+		add(rbRevista);
 		
 		rbPeriodico = new JRadioButton("Periodico");
-		add(rbPeriodico, "cell 1 1,grow");
+		add(rbPeriodico);
 		
 		lblLectura = new JLabel("Rellene los siguientes campos");
-		add(lblLectura, "cell 0 2,grow");
+		add(lblLectura);
 		
 		btnOpcion = new JButton("Aplicar Opcion");
 		
-		add(btnOpcion, "cell 1 2,grow");
-		add(txtCodigo, "cell 0 3,grow");
+		add(btnOpcion);
+		add(txtCodigo);
 		
-		
-		
-		
-		label = new JLabel("");
-		add(label, "cell 1 3,grow");
+		txtNombre = new JTextField();
+		txtNombre.setText("Nombre");
+		add(txtNombre);
+		txtNombre.setColumns(10);
 		ButtonGroup bg=new ButtonGroup();
 		bg.add(rbLibro);
 		bg.add(rbPeriodico);
 		bg.add(rbRevista);
 		
-		btnLectura = new JButton("Borrar");
+		txtCategoria = new JTextField();
+		txtCategoria.setText("Categoria");
+		add(txtCategoria);
+		txtCategoria.setColumns(10);
 		
-		add(btnLectura, "cell 0 4 2 1,grow");
+		txtEditorial = new JTextField();
+		txtEditorial.setText("Editorial");
+		add(txtEditorial);
+		txtEditorial.setColumns(10);
+		
+		btnLectura = new JButton("Insertar");
+		
+		add(btnLectura);
 		btnLectura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -121,8 +110,9 @@ public class GraficoInsertarLectura extends JPanel {
 				
 				}else if(rbPeriodico.isSelected()) {
 					byte codigo=Byte.valueOf(txtCodigo.getText());//Mediante este metodo pasamos un String que tenga numeros a un byte
-				
+					Lectura periodico=new Periodico(codigo,txtNombre.getText(),txtEditorial.getText(),txtCategoria.getText());
 					
+					creadorLectura.agregarLectura(periodico);
 				
 				
 				 op=new MisJOptionPane ();//Creamos el jOptionPane
@@ -132,12 +122,14 @@ public class GraficoInsertarLectura extends JPanel {
 				}else if(rbRevista.isSelected()) {
 					
 			byte codigo=Byte.valueOf(txtCodigo.getText());//Mediante este metodo pasamos un String que tenga numeros a un byte
+			Lectura revista=new Revista(codigo,txtNombre.getText(),txtCategoria.getText(),txtEditorial.getText());
 			
+			creadorLectura.agregarLectura(revista);
 		
-			
-			
-			 op=new MisJOptionPane ();//Creamos el jOptionPane
-	            JOptionPane.showMessageDialog(op, "Has creado el periodico "); 
+		
+		 op=new MisJOptionPane ();//Creamos el jOptionPane
+		 
+            JOptionPane.showMessageDialog(op, "Has creado la revista "+revista.getCodigo());
 				
 				}
 			
@@ -161,7 +153,10 @@ public class GraficoInsertarLectura extends JPanel {
 					
 				}
 		}
-		});;
+		});
+		
+		label_1 = new JLabel("");
+		add(label_1);;
 		
 		/**
 		 * Mediante este boton aplicacamos los radiobutoon y en los textos ponemos una guia de que debe incluirse
@@ -172,13 +167,15 @@ public class GraficoInsertarLectura extends JPanel {
 				if(rbLibro.isSelected()) {
 				
 				txtCodigo.setText("Codigo de libro");
-				
-					
+				txtNombre.setText("Nombre del libro");
+				txtCategoria.setText("Categoria");
+				txtEditorial.setText("Editorial");
 				}else if(rbPeriodico.isSelected()) {
 					
-					txtCodigo.setText("Codigo de Periodico");
-				
-					
+				txtCodigo.setText("Codigo de Periodico");
+				txtNombre.setText("Nombre del Periodico");
+				txtEditorial.setText("Editorial");
+				txtCategoria.setText("Tipo de Noticias");
 					
 				}else if(rbRevista.isSelected()) {
 					txtNombre.setText("Nombre");
@@ -190,170 +187,8 @@ public class GraficoInsertarLectura extends JPanel {
 		});
 		
 		
-		/**
-		 * Mediante esta funcion revisamos 
-		 */
+		
 	
-=======
-	public GraficoInsertarLectura() {
-		setLayout(new GridLayout(4, 6, 0, 0));
-		
-		JLabel lblNewLabel = new JLabel("Inserta Libro");
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		add(lblNewLabel_1);
-		
-		JButton btnNewButton = new JButton("");
-		add(btnNewButton);
-		
-		separator = new JSeparator();
-		add(separator);
-		
-		textField_3 = new JTextField();
-		add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_1 = new JTextField();
-		add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_4 = new JTextField();
-		add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		add(textField_5);
-		textField_5.setColumns(10);
-		
-		textField_7 = new JTextField();
-		add(textField_7);
-		textField_7.setColumns(10);
-		
-		textField_9 = new JTextField();
-		add(textField_9);
-		textField_9.setColumns(10);
-		
-		textField_8 = new JTextField();
-		add(textField_8);
-		textField_8.setColumns(10);
-		
-		textField_12 = new JTextField();
-		add(textField_12);
-		textField_12.setColumns(10);
-		
-		textField_11 = new JTextField();
-		add(textField_11);
-		textField_11.setColumns(10);
-		
-		textField_14 = new JTextField();
-		add(textField_14);
-		textField_14.setColumns(10);
-		
-		textField_10 = new JTextField();
-		add(textField_10);
-		textField_10.setColumns(10);
-		
-		textField_6 = new JTextField();
-		add(textField_6);
-		textField_6.setColumns(10);
-		
-		textField = new JTextField();
-		add(textField);
-		textField.setColumns(10);
-		
-		textField_2 = new JTextField();
-		add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_13 = new JTextField();
-		add(textField_13);
-		textField_13.setColumns(10);
-
->>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
-=======
-	public GraficoInsertarLectura() {
-		setLayout(new GridLayout(4, 6, 0, 0));
-		
-		JLabel lblNewLabel = new JLabel("Inserta Libro");
-		add(lblNewLabel);
-		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		add(lblNewLabel_1);
-		
-		JButton btnNewButton = new JButton("");
-		add(btnNewButton);
-		
-		separator = new JSeparator();
-		add(separator);
-		
-		textField_3 = new JTextField();
-		add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_1 = new JTextField();
-		add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_4 = new JTextField();
-		add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		add(textField_5);
-		textField_5.setColumns(10);
-		
-		textField_7 = new JTextField();
-		add(textField_7);
-		textField_7.setColumns(10);
-		
-		textField_9 = new JTextField();
-		add(textField_9);
-		textField_9.setColumns(10);
-		
-		textField_8 = new JTextField();
-		add(textField_8);
-		textField_8.setColumns(10);
-		
-		textField_12 = new JTextField();
-		add(textField_12);
-		textField_12.setColumns(10);
-		
-		textField_11 = new JTextField();
-		add(textField_11);
-		textField_11.setColumns(10);
-		
-		textField_14 = new JTextField();
-		add(textField_14);
-		textField_14.setColumns(10);
-		
-		textField_10 = new JTextField();
-		add(textField_10);
-		textField_10.setColumns(10);
-		
-		textField_6 = new JTextField();
-		add(textField_6);
-		textField_6.setColumns(10);
-		
-		textField = new JTextField();
-		add(textField);
-		textField.setColumns(10);
-		
-		textField_2 = new JTextField();
-		add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_13 = new JTextField();
-		add(textField_13);
-		textField_13.setColumns(10);
-
->>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
 	}
 
 }

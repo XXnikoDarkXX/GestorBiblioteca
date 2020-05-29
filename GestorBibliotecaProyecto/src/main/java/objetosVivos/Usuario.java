@@ -36,16 +36,27 @@ public class Usuario extends Persona {
      */
     public Usuario(String n, String a, byte e, String d) {
         super(n, a, e, d);
+        this.setEstado(false);
 
     }
 
+    
+    
+    
     /**
      * Getter de estado
      *
      * @return el estado true si esta dado de alta y false si esta dado de baja
      */
-    public boolean isEstado() {
-        return estado;
+    public String isEstado() {
+    	if(estado==true) {
+    		String alta="Alta";
+    		return alta;
+    	}else {
+    		String baja="Baja";
+    		return baja;
+    	}
+       
     }
 
     /**
