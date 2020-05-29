@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,6 +34,10 @@ public class GraficoInsertarLectura extends JPanel {
 =======
 
 public class GraficoInsertarLectura extends JPanel {
+=======
+
+public class GraficoInsertarLectura extends JPanel {
+>>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -49,11 +54,15 @@ public class GraficoInsertarLectura extends JPanel {
 	private JTextField textField_13;
 	private JTextField textField_14;
 	private JSeparator separator;
+<<<<<<< HEAD
+>>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
+=======
 >>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
 
 	/**
 	 * Create the panel.
 	 */
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public GraficoInsertarLectura(GraficoVentana ventana) {
 		this.v=ventana;
@@ -185,6 +194,86 @@ public class GraficoInsertarLectura extends JPanel {
 		 * Mediante esta funcion revisamos 
 		 */
 	
+=======
+	public GraficoInsertarLectura() {
+		setLayout(new GridLayout(4, 6, 0, 0));
+		
+		JLabel lblNewLabel = new JLabel("Inserta Libro");
+		add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("");
+		add(btnNewButton);
+		
+		separator = new JSeparator();
+		add(separator);
+		
+		textField_3 = new JTextField();
+		add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_1 = new JTextField();
+		add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_4 = new JTextField();
+		add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		add(textField_5);
+		textField_5.setColumns(10);
+		
+		textField_7 = new JTextField();
+		add(textField_7);
+		textField_7.setColumns(10);
+		
+		textField_9 = new JTextField();
+		add(textField_9);
+		textField_9.setColumns(10);
+		
+		textField_8 = new JTextField();
+		add(textField_8);
+		textField_8.setColumns(10);
+		
+		textField_12 = new JTextField();
+		add(textField_12);
+		textField_12.setColumns(10);
+		
+		textField_11 = new JTextField();
+		add(textField_11);
+		textField_11.setColumns(10);
+		
+		textField_14 = new JTextField();
+		add(textField_14);
+		textField_14.setColumns(10);
+		
+		textField_10 = new JTextField();
+		add(textField_10);
+		textField_10.setColumns(10);
+		
+		textField_6 = new JTextField();
+		add(textField_6);
+		textField_6.setColumns(10);
+		
+		textField = new JTextField();
+		add(textField);
+		textField.setColumns(10);
+		
+		textField_2 = new JTextField();
+		add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_13 = new JTextField();
+		add(textField_13);
+		textField_13.setColumns(10);
+
+>>>>>>> parent of 631a0c6... Grafico Agregar Lectura y InsertarLibros
 =======
 	public GraficoInsertarLectura() {
 		setLayout(new GridLayout(4, 6, 0, 0));
