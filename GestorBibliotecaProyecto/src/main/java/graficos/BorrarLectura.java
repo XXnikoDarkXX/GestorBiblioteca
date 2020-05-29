@@ -21,11 +21,13 @@ import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import net.miginfocom.swing.MigLayout;
 
-public class GraficoInsertarLectura extends JPanel {
+public class BorrarLectura extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JButton btnOpcion;
+	private JTextField txtEditorial;
+	private JTextField txtNombre;
+	private JTextField txtCategoria;
 	private JTextField txtCodigo;
 	private JLabel label;
 	private JRadioButton rbPeriodico;
@@ -41,47 +43,96 @@ public class GraficoInsertarLectura extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GraficoInsertarLectura(GraficoVentana ventana) {
+	public BorrarLectura(GraficoVentana ventana) {
 		this.v=ventana;
 		lblNewLabel_1 = new JLabel("Elige la opcion Que vas a usar:");
 		
 		txtCodigo = new JTextField();
 		txtCodigo.setText("Codigo");
 		txtCodigo.setColumns(10);
-		setLayout(new MigLayout("", "[225px][225px]", "[64px][64px][64px][64px][64px]"));
-		add(lblNewLabel_1, "cell 0 0,grow");
+		
+		txtNombre = new JTextField();
+		txtNombre.setText("nombre");
+		txtNombre.setColumns(10);
+		
+		txtCategoria = new JTextField();
+		txtCategoria.setText("categoria");
+		txtCategoria.setColumns(10);
+		setLayout(new GridLayout(0, 2, 0, 0));
+		add(lblNewLabel_1);
 		
 		rbLibro = new JRadioButton("Libro");
 		rbLibro.setSelected(true);
-		add(rbLibro, "cell 1 0,grow");
+		add(rbLibro);
 		
 		rbRevista = new JRadioButton("Revista");
-		add(rbRevista, "cell 0 1,grow");
+		add(rbRevista);
 		
 		rbPeriodico = new JRadioButton("Periodico");
-		add(rbPeriodico, "cell 1 1,grow");
+		add(rbPeriodico);
 		
 		lblLectura = new JLabel("Rellene los siguientes campos");
-		add(lblLectura, "cell 0 2,grow");
+		add(lblLectura);
 		
 		btnOpcion = new JButton("Aplicar Opcion");
 		
-		add(btnOpcion, "cell 1 2,grow");
-		add(txtCodigo, "cell 0 3,grow");
+		add(btnOpcion);
+		add(txtCodigo);
+		add(txtNombre);
+		add(txtCategoria);
+		
+		
+		txtEditorial = new JTextField();
+		txtEditorial.setText("Editorial");
+		txtEditorial.setColumns(10);
+		add(txtEditorial);
+		
+		btnLectura = new JButton("Insertar");
+		
+		add(btnLectura);
 		
 		
 		
 		
 		label = new JLabel("");
-		add(label, "cell 1 3,grow");
+		add(label);
 		ButtonGroup bg=new ButtonGroup();
 		bg.add(rbLibro);
 		bg.add(rbPeriodico);
-		bg.add(rbRevista);
+		bg.add(rbRevista);;
 		
-		btnLectura = new JButton("Borrar");
+		/**
+		 * Mediante este boton aplicacamos los radiobutoon y en los textos ponemos una guia de que debe incluirse
+		 */
+		btnOpcion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(rbLibro.isSelected()) {
+				txtNombre.setText("Nombre");
+				txtCodigo.setText("Codigo numerico");
+				txtCategoria.setText("Categoria");
 		
-		add(btnLectura, "cell 0 4 2 1,grow");
+				txtEditorial.setText("Editorial");
+					
+				}else if(rbPeriodico.isSelected()) {
+					txtNombre.setText("Nombre");
+					txtCodigo.setText("Codigo numerico");
+					txtEditorial.setText("Editorial");
+					
+					txtCategoria.setText("Tipo De Noticias");
+				}else if(rbRevista.isSelected()) {
+					txtNombre.setText("Nombre");
+					txtCodigo.setText("Codigo numerico");
+					txtEditorial.setText("Autor");
+					txtCategoria.setText("Tipo De Revista");
+				}
+			}
+		});
+		
+		
+		/**
+		 * Mediante esta funcion revisamos 
+		 */
 		btnLectura.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -99,9 +150,9 @@ public class GraficoInsertarLectura extends JPanel {
 				}else if(rbPeriodico.isSelected()) {
 					byte codigo=Byte.valueOf(txtCodigo.getText());//Mediante este metodo pasamos un String que tenga numeros a un byte
 				
-					
+					Lectura periodico=new Periodico(codigo,txtNombre.getText(),txtEditorial.getText(),txtCategoria.getText());
 				
-				
+				creadorLectura.agregarLectura(periodico);
 				 op=new MisJOptionPane ();//Creamos el jOptionPane
 				 
 		            JOptionPane.showMessageDialog(op, "Has creado el periodico "+periodico.getCodigo());
@@ -110,11 +161,11 @@ public class GraficoInsertarLectura extends JPanel {
 					
 			byte codigo=Byte.valueOf(txtCodigo.getText());//Mediante este metodo pasamos un String que tenga numeros a un byte
 			
-		
+			Lectura revista=new Revista(codigo,txtNombre.getText(),txtCategoria.getText(),txtEditorial.getText());
 			
-			
+			creadorLectura.agregarLectura(revista);
 			 op=new MisJOptionPane ();//Creamos el jOptionPane
-	            JOptionPane.showMessageDialog(op, "Has creado el periodico "); 
+	            JOptionPane.showMessageDialog(op, "Has creado el periodico "+revista.getCodigo()); 
 				
 				}
 			
@@ -138,38 +189,7 @@ public class GraficoInsertarLectura extends JPanel {
 					
 				}
 		}
-		});;
-		
-		/**
-		 * Mediante este boton aplicacamos los radiobutoon y en los textos ponemos una guia de que debe incluirse
-		 */
-		btnOpcion.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(rbLibro.isSelected()) {
-				
-				txtCodigo.setText("Codigo de libro");
-				
-					
-				}else if(rbPeriodico.isSelected()) {
-					
-					txtCodigo.setText("Codigo de Periodico");
-				
-					
-					
-				}else if(rbRevista.isSelected()) {
-					txtNombre.setText("Nombre");
-					txtCodigo.setText("Codigo numerico");
-					txtEditorial.setText("Autor");
-					txtCategoria.setText("Tipo De Revista");
-				}
-			}
 		});
-		
-		
-		/**
-		 * Mediante esta funcion revisamos 
-		 */
 	
 	}
 
