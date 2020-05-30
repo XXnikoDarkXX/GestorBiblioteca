@@ -191,7 +191,9 @@ public class Gestor extends Persona {
 
          int nfilas = smt.executeUpdate("delete from revista where CODIGO= " + (byte)codigo);//borramos el libro que 
          rs.close();
-    }
+         smt.close();
+         con.close();
+       }
     
     
     
@@ -199,11 +201,12 @@ public class Gestor extends Persona {
     	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
     	
-    	
-    	ResultSet rs = smt.executeQuery("select * from revista");
+    	 ResultSet rs = smt.executeQuery("select * from periodico");
 
-        int nfilas = smt.executeUpdate("delete from revista where CODIGO= " + (byte)codigo);//borramos el libro que 
-        rs.close();
+         int nfilas = smt.executeUpdate("delete from periodico where CODIGO= " + (byte)codigo);//borramos el libro que 
+         rs.close();
+         smt.close();
+         con.close();
     }
     
     
@@ -247,11 +250,11 @@ public class Gestor extends Persona {
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
         ResultSet rs = smt.executeQuery("select * from LIBROS");
-        String libros = "CODIGO\t   |  NOMBRE\t  |  CATEGORIA\t |  PRESTAMO  \t| EDITORIAL  \n";
+        String libros = "CODIGO\t       |     NOMBRE\t    |    CATEGORIA\t    |     PRESTAMO    |   EDITORIAL\n";
        
         while (rs.next()) {
             
-                libros += rs.getInt("CODIGO") + " :\t    " + rs.getString("NOMBRE") + " :\t" + rs.getString("CATEGORIA") + " :\t" + rs.getString("PRESTAMO") + " :\t       " + rs.getString("EDITORIAL")+"\n";
+                libros += rs.getInt("CODIGO") + " :\t      " + rs.getString("NOMBRE") + " :\t    " + rs.getString("CATEGORIA") + " :\t                   " + rs.getString("PRESTAMO") + " :\t       " + rs.getString("EDITORIAL")+"\n";
 
             
         }
@@ -301,11 +304,11 @@ public class Gestor extends Persona {
         Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
         Statement smt = con.createStatement();//Crear la consulta
         ResultSet rs = smt.executeQuery("select * from PERIODICO");
-        String periodico = "CODIGO         |       NOMBRE       |      EDITORIAL    |      PRESTAMO     |    TIPODENOTICIAS \n";
+        String periodico = "CODIGO\t |       NOMBRE       |      EDITORIAL     |      PRESTAMO        |    TIPODENOTICIAS \n";
         int i = 0;//contador
         while (rs.next()) {
-          
-                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          " + rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS");
+           
+                periodico += rs.getInt("CODIGO") + " :                      " + rs.getString("NOMBRE") + " :              " + rs.getString("EDITORIAL") + " :                       " + rs.getString("PRESTAMO") + " :               " + rs.getString("TIPODENOTICIAS")+"\n";
 
             
         }
@@ -314,6 +317,63 @@ public class Gestor extends Persona {
         smt.close();
         con.close();
         return periodico;
+    }
+    /**
+     * Metodo para Concultar los usurios de la bbd
+     * @return un String con toda la informacion
+     * @throws SQLException en caso de error con la peticcion de la bbdd nos lanzara esta excepcion
+     */
+    public String consultarUsuarios() throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+        ResultSet rs = smt.executeQuery("select * from USUARIO");
+        String usuario = " |NOMBRE    \t|APELLIDOS    \t| EDAD    \t|    DNI     \t| ESTADO\n";
+       
+        while (rs.next()) {
+          
+                usuario += rs.getString("NOMBRE") + "\t" + rs.getString("APELLIDOS") + " :\t\t" + rs.getInt("EDAD") + " :\t    " + rs.getString("DNI") + " : \t" + rs.getString("ESTADO")+"\n";
+
+            
+        }
+
+        rs.close();
+        smt.close();
+        con.close();
+        return usuario;
+    }
+    
+    /**
+     * Metodo para dar de alta a un usuario
+     * @param nif nif del usuario
+     * @throws SQLException
+     */
+    public void darAltaUsuario(String nif) throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+    	
+    	 ResultSet rs = smt.executeQuery("select * from periodico");
+
+         int nfilas = smt.executeUpdate("UPDATE USUARIO SET ESTADO='Alta' WHERE DNI= '"+nif+"'" );//borramos el libro que 
+         rs.close();
+         smt.close();
+         con.close();
+    }
+    
+    /**
+     * Metodo para dar de baja a un usuario
+     * @param nif nif del usuario
+     * @throws SQLException
+     */
+    public void darBajaUsuario(String nif) throws SQLException {
+    	Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/BIBLIOTECA?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "admin");
+        Statement smt = con.createStatement();//Crear la consulta
+    	
+    	 ResultSet rs = smt.executeQuery("select * from periodico");
+
+         int nfilas = smt.executeUpdate("UPDATE USUARIO SET ESTADO='Baja' WHERE DNI= '"+nif+"'" );//borramos el libro que 
+         rs.close();
+         smt.close();
+         con.close();
     }
 
 }

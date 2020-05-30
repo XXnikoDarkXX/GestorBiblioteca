@@ -65,6 +65,8 @@ public class GraficoGestor extends JPanel {
 					ventana.cargarGraficoBorrarLectura();
 				}else if(rbOpcion3.isSelected()) {
 					ventana.cargarGraficoInsertarLectura();
+				}else if(rbOpcion4.isSelected()) {
+					ventana.cargarGraficoEstadoUsuario();
 				}
 			}
 		});

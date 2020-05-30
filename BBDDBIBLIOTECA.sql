@@ -8,7 +8,7 @@ CREATE TABLE USUARIO(
     DNI CHARACTER(20),
     ESTADO CHARACTER(20));
 
-    
+    ALTER TABLE USUARIO ADD CONSTRAINT  PRIMARY KEY (DNI);
 
 CREATE TABLE LIBROS(
 	CODIGO INTEGER(2) primary KEY,
@@ -49,6 +49,9 @@ INSERT INTO GESTOR VALUES('123456E','PRUEBA','PROBANDO',19);
 INSERT INTO PERIODICO VALUES(2,'EL MUNDO','planetamundo','en uso','deporte');
 
 select * from usuario;
+select * from revista;
+select * from periodico;
+delete from usuario
+where estado='Baja';
 
-delete from gestor
-where edad=18;
+UPDATE USUARIO SET ESTADO='ALTA' WHERE DNI='12427190A';

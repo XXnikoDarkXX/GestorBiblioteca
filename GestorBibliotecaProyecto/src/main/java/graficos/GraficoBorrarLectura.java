@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import javax.swing.JScrollPane;
 
 public class GraficoBorrarLectura extends JPanel {
 	private JTextField txtCodigo;
@@ -51,10 +52,6 @@ public class GraficoBorrarLectura extends JPanel {
 		
 		add(btnOpcion);
 		
-		JTextPane txtConsulta = new JTextPane();
-		txtConsulta.setBounds(0, 115, 570, 84);
-		add(txtConsulta);
-		
 		JLabel lblCodigo = new JLabel("Escribe el codigo Del libro que desea Borrar");
 		lblCodigo.setBounds(0, 199, 450, 33);
 		add(lblCodigo);
@@ -73,7 +70,12 @@ public class GraficoBorrarLectura extends JPanel {
 		bg.add(rbConsultarPeriodico);;
 		bg.add(rbConsultarRevistas);
 		bg.add(rbConsultarLibros);
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 106, 600, 84);
+		add(scrollPane_1);
 		
+		JTextPane txtConsulta = new JTextPane();
+		scrollPane_1.setViewportView(txtConsulta);
 		btnOpcion.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -110,6 +112,8 @@ public class GraficoBorrarLectura extends JPanel {
 		
 		
 		add(btnBorrar);
+		
+		
 		btnBorrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -131,14 +135,20 @@ public class GraficoBorrarLectura extends JPanel {
 					byte codigo=Byte.parseByte(txtCodigo.getText());
 					try {
 						gestor.borrarRevista(codigo);
+						op=new MisJOptionPane ();//Creamos el jOptionPane
+						 
+			            JOptionPane.showMessageDialog(op, "HasBorrado la revista con el codigo"+codigo);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}else if(rbConsultarPeriodico.isSelected()) {
-					byte codigo=Byte.parseByte(txtCodigo.getText());
+					byte codigo=Byte.valueOf(txtCodigo.getText());
 					try {
 						gestor.borrarPeriodico(codigo);
+						op=new MisJOptionPane ();//Creamos el jOptionPane
+						 
+			            JOptionPane.showMessageDialog(op, "HasBorrado el periodico con el codigo"+codigo);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

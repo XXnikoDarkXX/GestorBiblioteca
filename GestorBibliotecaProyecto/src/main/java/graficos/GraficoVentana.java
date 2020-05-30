@@ -29,6 +29,7 @@ public class GraficoVentana extends JFrame {
 	private InsertarGestor inserGestor;//Grafico para insertar Gestor
 	private GraficoInsertarLectura inserLectura;//Grafico para insertar lectura desde GESTOR
 	private GraficoBorrarLectura borrarLectura;//Grafico para mostrar y borrar lectura desde GESTOR
+	private GraficoEstadoUsuario estadoUsuario;//Grafico para consultar y dar de alta/baja a los usuarios
 	
 	/**
 	 * Launch the application.
@@ -196,7 +197,19 @@ public class GraficoVentana extends JFrame {
 	}
 	 
 	 
-	 
+	 /**
+	  * Metodo para cargar la grafica de borrarLectura
+	  */
+	 public void cargarGraficoEstadoUsuario() {
+		if (this.estadoUsuario==null) {
+			this.estadoUsuario=new GraficoEstadoUsuario(this);
+		}
+		
+		this.estadoUsuario.setVisible(false);
+		
+		this.setContentPane(this.estadoUsuario);
+		this.estadoUsuario.setVisible(true);
+	}
 
 }
 

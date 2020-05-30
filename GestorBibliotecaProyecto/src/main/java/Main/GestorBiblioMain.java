@@ -49,8 +49,7 @@ public class GestorBiblioMain {
         
         System.out.println(prueba.consultarRevistas());
         
-    
-   
+
       //  prueba.elegirRevista((byte)6);
        
     }
