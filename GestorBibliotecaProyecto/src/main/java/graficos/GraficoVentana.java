@@ -30,6 +30,7 @@ public class GraficoVentana extends JFrame {
 	private GraficoInsertarLectura inserLectura;//Grafico para insertar lectura desde GESTOR
 	private GraficoBorrarLectura borrarLectura;//Grafico para mostrar y borrar lectura desde GESTOR
 	private GraficoEstadoUsuario estadoUsuario;//Grafico para consultar y dar de alta/baja a los usuarios
+	private GraficoGestionUsuario gestionUsuario;//Grafico de gestion del usuario
 	
 	/**
 	 * Launch the application.
@@ -92,6 +93,7 @@ public class GraficoVentana extends JFrame {
 		contentPane.add(btnGestor);
 
 		JButton btnUsuario = new JButton("Usuario");
+	
 		contentPane.add(btnUsuario);
 		/**
 		 * Mediante el boton de gestor cargamos el menu de los gestores
@@ -102,8 +104,15 @@ public class GraficoVentana extends JFrame {
 				cargarGraficoGestor();
 			}
 		});
-		
-		
+		/**
+		 * Metodo para cargar el grafico del usuario pinchando el boton
+		 */
+		btnUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cargarGraficoGestionUsuario();
+			}
+		});
 		
 	}
 	
@@ -209,6 +218,20 @@ public class GraficoVentana extends JFrame {
 		
 		this.setContentPane(this.estadoUsuario);
 		this.estadoUsuario.setVisible(true);
+	}
+	 
+	 /**
+	  * Metodo para cargar la grafica de gestion de usuario
+	  */
+	 public void cargarGraficoGestionUsuario() {
+		if (this.gestionUsuario==null) {
+			this.gestionUsuario=new GraficoGestionUsuario(this);
+		}
+		
+		this.gestionUsuario.setVisible(false);
+		
+		this.setContentPane(this.gestionUsuario);
+		this.gestionUsuario.setVisible(true);
 	}
 
 }

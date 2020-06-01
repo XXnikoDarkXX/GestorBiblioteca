@@ -113,7 +113,9 @@ public class GraficoBorrarLectura extends JPanel {
 		
 		add(btnBorrar);
 		
-		
+		/**
+		 * Mediante este boton borramos la lectura elegida
+		 */
 		btnBorrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

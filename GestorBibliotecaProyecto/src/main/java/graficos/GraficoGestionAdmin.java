@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
@@ -94,6 +95,7 @@ public class GraficoGestionAdmin extends JPanel {
 					ventana.setVisible(false);
 					op.setVisible(false);
 					e1.printStackTrace();
+					
 					
 				}
 			}

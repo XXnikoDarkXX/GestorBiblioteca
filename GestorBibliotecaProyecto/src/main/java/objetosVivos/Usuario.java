@@ -40,7 +40,9 @@ public class Usuario extends Persona {
 
     }
 
-    
+    public Usuario() {
+    	
+    }
     
     
     /**
@@ -93,7 +95,7 @@ public class Usuario extends Persona {
         int i = 0;//contador
         while (rs.next()) {
             if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
-                libros += rs.getInt("CODIGO") + " :      " + rs.getString("NOMBRE") + " : " + rs.getString("CATEGORIA") + " :     " + rs.getString("PRESTAMO") + " :      " + rs.getString("EDITORIAL");
+                libros += rs.getInt("CODIGO") + " :      " + rs.getString("NOMBRE") + " :\t" + rs.getString("CATEGORIA") + " :     " + rs.getString("PRESTAMO") + " :      " + rs.getString("EDITORIAL")+"\n";
 
             }
         }
@@ -119,7 +121,7 @@ public class Usuario extends Persona {
         int i = 0;//contador
         while (rs.next()) {
             if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
-                revista += rs.getInt("CODIGO") + " :\t\t" + rs.getString("NOMBRE") + " :  \t\t" + rs.getString("TIPOREVISTA") + " :\t\t " + rs.getString("AUTOR") + " : \t\t" + rs.getString("PRESTAMO");
+                revista += rs.getInt("CODIGO") + " :\t" + rs.getString("NOMBRE") + " :\t \t" + rs.getString("TIPOREVISTA") + "      :\t " + rs.getString("AUTOR") + " :           \t" + rs.getString("PRESTAMO")+"\n";
 
             }
         }
@@ -146,7 +148,7 @@ public class Usuario extends Persona {
         int i = 0;//contador
         while (rs.next()) {
             if (rs.getString("PRESTAMO").equalsIgnoreCase("NO EN USO")) {
-                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          " + rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS");
+                periodico += rs.getInt("CODIGO") + " :                 " + rs.getString("NOMBRE") + " :          " + rs.getString("EDITORIAL") + " :       " + rs.getString("PRESTAMO") + " :        " + rs.getString("TIPODENOTICIAS")+"\n";
 
             }
         }
