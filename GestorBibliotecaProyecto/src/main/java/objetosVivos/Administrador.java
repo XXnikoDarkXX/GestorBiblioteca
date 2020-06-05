@@ -31,8 +31,8 @@ public class Administrador extends Persona {
      * Funcion por el cual el administrador puede borrar Gestores por medio del
      * nif
      *
-     * @param nif
-     * @throws SQLException
+     * @param nif Nif del gestor que desea borrar
+     * @throws SQLException,GestorExcepcion en caso de error nos lanzara este error
      */
     public void borrarGestor(String nif) throws SQLException, GestorExcepcion {
         int contador = 0;//lo usremos para saber si el nif no existe
@@ -43,7 +43,7 @@ public class Administrador extends Persona {
         //MEDIANTe este while añadimos a las lista los codigos en uso
         while (rs.next()) {
 
-            lista.add(rs.getString("NIF"));
+            lista.add(rs.getString("NIF"));//Añadimos a la lista los nif de la bbdd
 
         }
 

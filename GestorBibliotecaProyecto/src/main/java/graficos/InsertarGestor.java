@@ -90,10 +90,11 @@ public class InsertarGestor extends JPanel {
 							txtEdad.setText("edad");
 							 edad=Byte.valueOf(txtEdad.getText());
 						}
+						//Creamos un gestor
 						 gest=new Gestor(txtNombre.getText(),txtApellido.getText(),Byte.parseByte(txtEdad.getText()),txtNif.getText());
 			//			 (Circulo)miObjeto)
 			((Gestor)gestor).insertarGestor(gest.getDni(), gest.getNombre(), gest.getApellido(), gest.getEdad());
-		//gest.insertarGestor(gest.getDni(), gest.getNombre(), gest.getApellido(), gest.getEdad());
+		
 							 op=new MisJOptionPane ();//Creamos el jOptionPane
 							 
 					            JOptionPane.showMessageDialog(op, "Gestor creado con Nif "+gest.getDni());
@@ -114,8 +115,9 @@ public class InsertarGestor extends JPanel {
 							txtEdad.setText("edad");
 							 edad=Byte.valueOf(txtEdad.getText());
 						}
+						//Creamos un objeto Usuario
 						 gest=new Usuario(txtNombre.getText(),txtApellido.getText(),Byte.parseByte(txtEdad.getText()),txtNif.getText());
-						 gestor.insertarUsuario((Usuario)gest);
+						 gestor.insertarUsuario((Usuario)gest);//Lo insertamos
 							 op=new MisJOptionPane ();//Creamos el jOptionPane
 							 
 					            JOptionPane.showMessageDialog(op, "Usuario creado con Nif "+gest.getDni());

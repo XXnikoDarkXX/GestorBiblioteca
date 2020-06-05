@@ -26,7 +26,7 @@ import objetosVivos.Usuario;
  */
 public class GestorBiblioMain {
 
-    /**
+    /**Main principal para el programa de Biblioteca
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, LecturaExcepcion, GestorExcepcion {
@@ -35,22 +35,14 @@ public class GestorBiblioMain {
             GraficoVentana ventana=new GraficoVentana();
             ventana.setVisible(true);
             
-        Usuario prueba=new Usuario("pepe","garcia",(byte)22,"34");
+      
         
-      Gestor nicolas=new Gestor("Nicolas","sanchez",(byte)18,"54373141");
-     //nicolas.insertarUsuario(prueba);
      
-       Administrador pepe=new Administrador("Coco","sanchez",(byte)18,"1223a");
-        Lectura lectu=new Revista((byte)1,"La morte","Fantasia","NO EN USO");
         
-      //  nicolas.agregarLectura(lectu); 
-        
-      //  nicolas.borrarLectura(lectu);
-        
-        System.out.println(prueba.consultarRevistas());
+ 
         
 
-      //  prueba.elegirRevista((byte)6);
+     
        
     }
     

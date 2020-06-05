@@ -6,7 +6,7 @@
 package objetosLectura;
 
 /**
- *
+ *Excepcion de Lectura en caso de que un usuario elija un codigo de libro ya elegido nos saltara este error
  * @author nicoc
  */
 public class LecturaExcepcion  extends Exception{

@@ -6,7 +6,7 @@
 package objetosVivos;
 
 /**
- *
+ *Cuando elijamos un gestor por el nif en caso de que este mal escrito nos dara el error de que el nif elegido no existe
  * @author nicoc
  */
 public class GestorExcepcion extends Exception{

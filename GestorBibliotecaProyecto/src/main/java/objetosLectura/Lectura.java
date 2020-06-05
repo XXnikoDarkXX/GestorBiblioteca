@@ -7,7 +7,7 @@ package objetosLectura;
 
 
 /**
- *SuperClase lectura todo lo relacionado con los libros,revistas, periódicos.... se heredará de aqiu
+ *SuperClase lectura todo lo relacionado con los libros,revistas, periódicos.... se heredará de aqui
  * @author nicoc
  */
 public abstract class Lectura {
@@ -77,7 +77,11 @@ public abstract class Lectura {
    
 
   
-  
+    /**
+     * Funcion que hace que si usas un codigo en uso mostrara un mensaje de usar
+     * @param codigo
+     * @return
+     */
     public  String gestionLecturaUsuario(byte codigo) {
         
         String mensajeUsar="";
